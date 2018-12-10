@@ -70,7 +70,7 @@ Full plugin configuration below, optional properties can be omitted
 We recommend ruuning cucumber tests on `integration-test` phase as 
 
 - download features is running on `pre-integration-test` phase 
--  report submition on `post-integration-test`
+-  report submission on `post-integration-test`
 
 ### Example project 
 
