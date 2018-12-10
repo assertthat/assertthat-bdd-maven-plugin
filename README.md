@@ -74,4 +74,4 @@ We recommend ruuning cucumber tests on `integration-test` phase as
 
 ### Example project 
 
-Refer to example project for runing using Rake [assertthat-bdd-maven-example](https://github.com/assertthat/assertthat-bdd-maven-example)
+Refer to example project [assertthat-bdd-maven-example](https://github.com/assertthat/assertthat-bdd-maven-example)
