@@ -18,7 +18,7 @@
         <url>https://github.com/assertthat/assertthat-bdd-maven-plugin</url>
         <connection>scm:git:git://github.com/assertthat/assertthat-bdd-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:assertthat/assertthat-bdd-maven-plugin.git</developerConnection>
-      <tag>assertthat-bdd-maven-plugin-1.1</tag>
+        <tag>v1.1</tag>
   </scm>
     <developers>
         <developer>
