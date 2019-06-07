@@ -60,6 +60,8 @@ Full plugin configuration below, optional properties can be omitted
                 <jsonReportFolder>target/report/surefire-reports/cucumber/</jsonReportFolder>
                 <!--Optional - default - **/*.json -->
                 <jsonReportIncludePattern>**/cucumber.json</jsonReportIncludePattern>
+                 <!--Optional - default cucumber (can be one of: cucumber/karate)-->
+                <type>cucumber</type>
             </configuration>
         </execution>
     </executions>

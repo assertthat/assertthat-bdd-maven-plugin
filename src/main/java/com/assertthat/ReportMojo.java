@@ -70,6 +70,17 @@ public class ReportMojo extends AbstractMojo {
     private String mode;
     @Parameter(property = "jql")
     private String jql;
+    @Parameter(property = "type", defaultValue = "cucumber")
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
     public String getMode() {
         return mode;
