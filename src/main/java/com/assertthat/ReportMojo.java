@@ -192,7 +192,8 @@ public class ReportMojo extends AbstractMojo {
                 proxyUsername,
                 proxyPassword,
                 mode,
-                jql
+                jql,
+                type
         );
 
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword());
@@ -201,7 +202,7 @@ public class ReportMojo extends AbstractMojo {
         Long runid = -1L;
         for (String f : files) {
             try {
-                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f);
+                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, arguments.getType());
             } catch (IOException e) {
                 throw new MojoExecutionException("Failed to upload report", e);
             } catch (JSONException e) {
