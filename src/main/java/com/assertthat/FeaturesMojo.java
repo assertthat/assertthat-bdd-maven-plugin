@@ -73,6 +73,16 @@ public class FeaturesMojo extends AbstractMojo {
     private String jql;
     @Parameter(property = "type")
     private String type;
+    @Parameter(property = "jiraServerUrl")
+    private String jiraServerUrl;
+
+    public String getJiraServerUrl() {
+        return jiraServerUrl;
+    }
+
+    public void setJiraServerUrl(String jiraServerUrl) {
+        this.jiraServerUrl = jiraServerUrl;
+    }
 
     public String getType() {
         return type;
@@ -193,10 +203,11 @@ public class FeaturesMojo extends AbstractMojo {
                 proxyPassword,
                 mode,
                 jql,
-                type
+                type,
+                jiraServerUrl
         );
 
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword());
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
 
         try {
             File inZip = apiUtil.download(new File(arguments.getOutputFolder()), mode, jql);
