@@ -62,8 +62,10 @@ Full plugin configuration below, optional properties can be omitted
                 <jsonReportFolder>target/report/surefire-reports/cucumber/</jsonReportFolder>
                 <!--Optional - default - **/*.json -->
                 <jsonReportIncludePattern>**/cucumber.json</jsonReportIncludePattern>
-                 <!--Optional - default cucumber (can be one of: cucumber/karate)-->
+                <!--Optional - default cucumber (can be one of: cucumber/karate)-->
                 <type>cucumber</type>
+                <!--Optional - default 'Test run Test run dd MMM yyyy HH:mm:ss'-->
+                <runName>Custom test run name</runName>
             </configuration>
         </execution>
     </executions>
