@@ -50,16 +50,14 @@ public class FeaturesMojo extends AbstractMojo {
 
     @Parameter(property = "runName")
     private String runName;
-
+    @Parameter(property = "tags")
+    private String tags;
     @Parameter(property = "outputFolder")
     private String outputFolder;
-
     @Parameter(property = "jsonReportFolder")
     private String jsonReportFolder;
-
     @Parameter(property = "jsonReportIncludePattern")
     private String jsonReportIncludePattern;
-
     @Parameter(property = "proxyURI")
     private String proxyURI;
     @Parameter(property = "proxyUsername")
@@ -75,6 +73,14 @@ public class FeaturesMojo extends AbstractMojo {
     private String type;
     @Parameter(property = "jiraServerUrl")
     private String jiraServerUrl;
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     public String getJiraServerUrl() {
         return jiraServerUrl;
@@ -203,6 +209,7 @@ public class FeaturesMojo extends AbstractMojo {
                 proxyPassword,
                 mode,
                 jql,
+                tags,
                 type,
                 jiraServerUrl
         );
@@ -210,7 +217,9 @@ public class FeaturesMojo extends AbstractMojo {
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
 
         try {
-            File inZip = apiUtil.download(new File(arguments.getOutputFolder()), mode, jql);
+            File inZip =
+                    apiUtil.download(new File(arguments.getOutputFolder()),
+                            mode, jql, tags);
             File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()));
             zip.delete();
         } catch (IOException e) {

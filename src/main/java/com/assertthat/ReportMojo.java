@@ -51,10 +51,10 @@ public class ReportMojo extends AbstractMojo {
 
     @Parameter(property = "runName")
     private String runName;
-
+    @Parameter(property = "tags")
+    private String tags;
     @Parameter(property = "outputFolder")
     private String outputFolder;
-
     @Parameter(property = "jsonReportFolder")
     private String jsonReportFolder;
     @Parameter(property = "jsonReportIncludePattern")
@@ -74,6 +74,14 @@ public class ReportMojo extends AbstractMojo {
     private String type;
     @Parameter(property = "jiraServerUrl")
     private String jiraServerUrl;
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     public String getJiraServerUrl() {
         return jiraServerUrl;
@@ -203,6 +211,7 @@ public class ReportMojo extends AbstractMojo {
                 proxyPassword,
                 mode,
                 jql,
+                tags,
                 type,
                 jiraServerUrl
         );
