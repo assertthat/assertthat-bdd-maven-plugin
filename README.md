@@ -19,7 +19,7 @@ Full plugin configuration below, optional properties can be omitted
  <plugin>
     <groupId>com.assertthat.plugins</groupId>
     <artifactId>assertthat-bdd-maven-plugin</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
     <configuration>
         <projectId>
             <!--Jira project id e.g. 10001-->
@@ -44,6 +44,8 @@ Full plugin configuration below, optional properties can be omitted
                 <jql>project = XX AND key in ('XXX-1')</jql>
                 <!--Optional - default automated (can be one of: manual/automated/both)-->
                 <mode>automated</mode>
+                <!--Optional - tag expression filter for scenarios. More on tag expressions https://cucumber.io/docs/cucumber/api/#tag-expressions-->
+                <tags>(@smoke or @ui) and (not @slow)</tags>
             </configuration>
             <id>features</id>
             <goals>
