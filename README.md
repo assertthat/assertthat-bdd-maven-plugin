@@ -19,7 +19,7 @@ Full plugin configuration below, optional properties can be omitted
  <plugin>
     <groupId>com.assertthat.plugins</groupId>
     <artifactId>assertthat-bdd-maven-plugin</artifactId>
-    <version>1.5</version>
+    <version>1.6</version>
     <configuration>
         <projectId>
             <!--Jira project id e.g. 10001-->
@@ -68,6 +68,8 @@ Full plugin configuration below, optional properties can be omitted
                 <type>cucumber</type>
                 <!--Optional - default 'Test run Test run dd MMM yyyy HH:mm:ss'-->
                 <runName>Custom test run name</runName>
+                <!--Optional - Run metadata -->
+               <metadata>{"env ":"uat ","build":"456"}</metadata>
             </configuration>
         </execution>
     </executions>
