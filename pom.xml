@@ -3,7 +3,7 @@
     <groupId>com.assertthat.plugins</groupId>
     <artifactId>assertthat-bdd-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.6</version>
     <name>assertthat-bdd-maven-plugin</name>
     <description>AssertThat BDD Jira maven plugin</description>
     <url>http://www.assertthat.com</url>
@@ -77,7 +77,7 @@
         <dependency>
             <groupId>com.assertthat.plugins</groupId>
             <artifactId>assertthat-bdd-standalone</artifactId>
-            <version>1.7</version>
+            <version>1.8</version>
         </dependency>
     </dependencies>
     <build>
