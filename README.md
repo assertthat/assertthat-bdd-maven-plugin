@@ -46,6 +46,8 @@ Full plugin configuration below, optional properties can be omitted
                 <mode>automated</mode>
                 <!--Optional - tag expression filter for scenarios. More on tag expressions https://cucumber.io/docs/cucumber/api/#tag-expressions-->
                 <tags>(@smoke or @ui) and (not @slow)</tags>
+                <!--Optional - prepend ordinal to feature name (default is true)-->                
+                <numbered>false</numbered>
             </configuration>
             <id>features</id>
             <goals>
