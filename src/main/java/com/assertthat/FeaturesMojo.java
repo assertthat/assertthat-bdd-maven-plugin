@@ -74,6 +74,17 @@ public class FeaturesMojo extends AbstractMojo {
     @Parameter(property = "jiraServerUrl")
     private String jiraServerUrl;
 
+    @Parameter(property = "numbered")
+    private boolean numbered;
+
+    public boolean isNumbered() {
+        return numbered;
+    }
+
+    public void setNumbered(boolean numbered) {
+        this.numbered = numbered;
+    }
+
     public String getTags() {
         return tags;
     }
@@ -211,7 +222,8 @@ public class FeaturesMojo extends AbstractMojo {
                 jql,
                 tags,
                 type,
-                jiraServerUrl
+                jiraServerUrl,
+                numbered
         );
 
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
@@ -219,7 +231,7 @@ public class FeaturesMojo extends AbstractMojo {
         try {
             File inZip =
                     apiUtil.download(new File(arguments.getOutputFolder()),
-                            mode, jql, tags);
+                            mode, jql, tags, arguments.isNumbered());
             File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()));
             zip.delete();
         } catch (IOException e) {
@@ -227,5 +239,4 @@ public class FeaturesMojo extends AbstractMojo {
         }
 
     }
-
 }
