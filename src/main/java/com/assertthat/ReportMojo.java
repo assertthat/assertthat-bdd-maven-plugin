@@ -225,7 +225,8 @@ public class ReportMojo extends AbstractMojo {
                 tags,
                 type,
                 jiraServerUrl,
-                metadata
+                metadata,
+                false
         );
 
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
