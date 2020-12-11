@@ -223,7 +223,7 @@ public class FeaturesMojo extends AbstractMojo {
                 tags,
                 type,
                 jiraServerUrl,
-                numbered
+                String.valueOf(numbered)
         );
 
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
