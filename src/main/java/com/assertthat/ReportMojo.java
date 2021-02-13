@@ -42,23 +42,15 @@ public class ReportMojo extends AbstractMojo {
 
     @Parameter(property = "accessKey")
     private String accessKey;
-
     @Parameter(property = "secretKey")
     private String secretKey;
-
     @Parameter(property = "projectId", required = true)
     private String projectId;
-
     @Parameter(property = "runName")
     private String runName;
-    @Parameter(property = "tags")
-    private String tags;
-    @Parameter(property = "outputFolder")
-    private String outputFolder;
     @Parameter(property = "jsonReportFolder")
     private String jsonReportFolder;
     @Parameter(property = "jsonReportIncludePattern")
-
     private String jsonReportIncludePattern;
     @Parameter(property = "proxyURI")
     private String proxyURI;
@@ -66,146 +58,12 @@ public class ReportMojo extends AbstractMojo {
     private String proxyUsername;
     @Parameter(property = "proxyPassword")
     private String proxyPassword;
-    @Parameter(property = "mode", defaultValue = "automated")
-    private String mode;
-    @Parameter(property = "jql")
-    private String jql;
     @Parameter(property = "type", defaultValue = "cucumber")
     private String type;
     @Parameter(property = "jiraServerUrl")
     private String jiraServerUrl;
-
-    public String getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
-    }
-
     @Parameter(property = "metadata")
     private String metadata;
-
-    public String getTags() {
-        return tags;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
-    public String getJiraServerUrl() {
-        return jiraServerUrl;
-    }
-
-    public void setJiraServerUrl(String jiraServerUrl) {
-        this.jiraServerUrl = jiraServerUrl;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
-    }
-
-    public String getJql() {
-        return jql;
-    }
-
-    public void setJql(String jql) {
-        this.jql = jql;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
-    public String getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getRunName() {
-        return runName;
-    }
-
-    public void setRunName(String runName) {
-        this.runName = runName;
-    }
-
-    public String getOutputFolder() {
-        return outputFolder;
-    }
-
-    public void setOutputFolder(String outputFolder) {
-        this.outputFolder = outputFolder;
-    }
-
-    public String getJsonReportFolder() {
-        return jsonReportFolder;
-    }
-
-    public void setJsonReportFolder(String jsonReportFolder) {
-        this.jsonReportFolder = jsonReportFolder;
-    }
-
-    public String getJsonReportIncludePattern() {
-        return jsonReportIncludePattern;
-    }
-
-    public void setJsonReportIncludePattern(String jsonReportIncludePattern) {
-        this.jsonReportIncludePattern = jsonReportIncludePattern;
-    }
-
-    public String getProxyURI() {
-        return proxyURI;
-    }
-
-    public void setProxyURI(String proxyURI) {
-        this.proxyURI = proxyURI;
-    }
-
-    public String getProxyUsername() {
-        return proxyUsername;
-    }
-
-    public void setProxyUsername(String proxyUsername) {
-        this.proxyUsername = proxyUsername;
-    }
-
-    public String getProxyPassword() {
-        return proxyPassword;
-    }
-
-    public void setProxyPassword(String proxyPassword) {
-        this.proxyPassword = proxyPassword;
-    }
 
     public void execute()
             throws MojoExecutionException {
@@ -214,19 +72,19 @@ public class ReportMojo extends AbstractMojo {
                 secretKey,
                 projectId,
                 runName,
-                outputFolder,
+                null,
                 jsonReportFolder,
                 jsonReportIncludePattern,
                 proxyURI,
                 proxyUsername,
                 proxyPassword,
-                mode,
-                jql,
-                tags,
+                null,
+                null,
+                null,
                 type,
                 jiraServerUrl,
                 metadata,
-                "true"
+                true
         );
 
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
