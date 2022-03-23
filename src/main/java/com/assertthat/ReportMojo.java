@@ -64,6 +64,8 @@ public class ReportMojo extends AbstractMojo {
     private String jiraServerUrl;
     @Parameter(property = "metadata")
     private String metadata;
+    @Parameter(property = "jql")
+    private String jql;
 
     public void execute()
             throws MojoExecutionException {
@@ -79,7 +81,7 @@ public class ReportMojo extends AbstractMojo {
                 proxyUsername,
                 proxyPassword,
                 null,
-                null,
+                jql,
                 null,
                 type,
                 jiraServerUrl,
@@ -93,7 +95,7 @@ public class ReportMojo extends AbstractMojo {
         Long runid = -1L;
         for (String f : files) {
             try {
-                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, arguments.getType(), metadata);
+                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, arguments.getType(), metadata, arguments.getJql());
             } catch (IOException e) {
                 throw new MojoExecutionException("Failed to upload report", e);
             } catch (JSONException e) {
