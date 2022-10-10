@@ -24,9 +24,9 @@ package com.assertthat;
  * Created by Glib_Briia on 15/05/2018.
  */
 
-import com.assertthat.plugins.internal.APIUtil;
-import com.assertthat.plugins.internal.Arguments;
-import com.assertthat.plugins.internal.FileUtil;
+import com.assertthat.plugins.standalone.APIUtil;
+import com.assertthat.plugins.standalone.ArgumentsReport;
+import com.assertthat.plugins.standalone.FileUtil;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -66,36 +66,42 @@ public class ReportMojo extends AbstractMojo {
     private String metadata;
     @Parameter(property = "jql")
     private String jql;
+    @Parameter(property = "ignoreCertErrors", defaultValue = "false")
+    private Boolean ignoreCertErrors;
 
     public void execute()
             throws MojoExecutionException {
-        Arguments arguments = new Arguments(
+        ArgumentsReport arguments = new ArgumentsReport(
                 accessKey,
                 secretKey,
                 projectId,
                 runName,
-                null,
                 jsonReportFolder,
                 jsonReportIncludePattern,
                 proxyURI,
                 proxyUsername,
                 proxyPassword,
-                null,
                 jql,
-                null,
                 type,
                 jiraServerUrl,
                 metadata,
-                true
+                ignoreCertErrors
         );
 
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
+                arguments.getAccessKey(),
+                arguments.getSecretKey(),
+                arguments.getProxyURI(),
+                arguments.getProxyUsername(),
+                arguments.getProxyPassword(),
+                arguments.getJiraServerUrl(),
+                arguments.isIgnoreCertErrors());
 
         String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null);
         Long runid = -1L;
         for (String f : files) {
             try {
-                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, arguments.getType(), metadata, arguments.getJql());
+                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, arguments.getType(), arguments.getMetadata(), arguments.getJql());
             } catch (IOException e) {
                 throw new MojoExecutionException("Failed to upload report", e);
             } catch (JSONException e) {

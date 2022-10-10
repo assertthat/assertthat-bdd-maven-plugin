@@ -24,9 +24,9 @@ package com.assertthat;
  * Created by Glib_Briia on 15/05/2018.
  */
 
-import com.assertthat.plugins.internal.APIUtil;
-import com.assertthat.plugins.internal.Arguments;
-import com.assertthat.plugins.internal.FileUtil;
+import com.assertthat.plugins.standalone.APIUtil;
+import com.assertthat.plugins.standalone.ArgumentsFeatures;
+import com.assertthat.plugins.standalone.FileUtil;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -65,33 +65,39 @@ public class FeaturesMojo extends AbstractMojo {
     private String jiraServerUrl;
     @Parameter(property = "numbered", defaultValue = "true")
     private Boolean numbered;
+    @Parameter(property = "ignoreCertErrors", defaultValue = "false")
+    private Boolean ignoreCertErrors;
 
     public void execute()
             throws MojoExecutionException {
-        Arguments arguments = new Arguments(
+        ArgumentsFeatures arguments = new ArgumentsFeatures(
                 accessKey,
                 secretKey,
                 projectId,
-                null,
                 outputFolder,
-                null,
-                null,
                 proxyURI,
                 proxyUsername,
                 proxyPassword,
                 mode,
                 jql,
                 tags,
-                null,
                 jiraServerUrl,
-                numbered
+                numbered,
+                ignoreCertErrors
         );
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl());
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
+                arguments.getAccessKey(),
+                arguments.getSecretKey(),
+                arguments.getProxyURI(),
+                arguments.getProxyUsername(),
+                arguments.getProxyPassword(),
+                arguments.getJiraServerUrl(),
+                arguments.isIgnoreCertErrors());
 
         try {
             File inZip =
                     apiUtil.download(new File(arguments.getOutputFolder()),
-                            mode, jql, tags, arguments.isNumbered());
+                            arguments.getMode(), arguments.getJql(), arguments.getTags(), arguments.isNumbered());
             File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()));
             zip.delete();
         } catch (IOException e) {
