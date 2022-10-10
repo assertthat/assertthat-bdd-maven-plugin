@@ -34,6 +34,8 @@ Full plugin configuration below, optional properties can be omitted
         </secretKey>
         <!-- Used for jira server integration only. If using cloud remove this option-->
         <jiraServerUrl>https://mycompanyjira.com</jiraServerUrl>
+        <!-- Optional - Ignore ssl certificate errors for self-signed certificates (default is false)-->
+        <ignoreCertErrors>true</ignoreCertErrors>
     </configuration>
     <executions>
         <execution>
