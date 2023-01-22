@@ -68,6 +68,8 @@ public class ReportMojo extends AbstractMojo {
     private String jql;
     @Parameter(property = "ignoreCertErrors", defaultValue = "false")
     private Boolean ignoreCertErrors;
+    @Parameter(property = "runId")
+    private Long runId = -1L;
 
     public void execute()
             throws MojoExecutionException {
@@ -98,13 +100,10 @@ public class ReportMojo extends AbstractMojo {
                 arguments.isIgnoreCertErrors());
 
         String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null);
-        Long runid = -1L;
         for (String f : files) {
             try {
-                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, arguments.getType(), arguments.getMetadata(), arguments.getJql());
-            } catch (IOException e) {
-                throw new MojoExecutionException("Failed to upload report", e);
-            } catch (JSONException e) {
+                runId = apiUtil.upload(runId, arguments.getRunName(), arguments.getJsonReportFolder() + f, arguments.getType(), arguments.getMetadata(), arguments.getJql());
+            } catch (IOException | JSONException e) {
                 throw new MojoExecutionException("Failed to upload report", e);
             }
         }
