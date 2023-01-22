@@ -73,9 +73,11 @@ Full plugin configuration below, optional properties can be omitted
                 <!--Optional - default 'Test run Test run dd MMM yyyy HH:mm:ss'-->
                 <runName>Custom test run name</runName>
                 <!--Optional - Run metadata -->
-               <metadata>{"env ":"uat ","build":"456"}</metadata>
+                <metadata>{"env ":"uat ","build":"456"}</metadata>
                 <!--Optional - all Jira tickets will be updated with test results by default; when JQL is provided only filtered tickets will be updated -->
                 <jql>project = XX AND key in ('XXX-1')</jql>
+                 <!--Optional - In case you want to append results to the existing test run -->
+                <runId>123</runId>
             </configuration>
         </execution>
     </executions>
