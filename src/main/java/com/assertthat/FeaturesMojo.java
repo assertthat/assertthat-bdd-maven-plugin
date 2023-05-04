@@ -35,6 +35,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 @Mojo(name = "features", defaultPhase = LifecyclePhase.GENERATE_TEST_RESOURCES)
 public class FeaturesMojo extends AbstractMojo {
@@ -67,7 +68,10 @@ public class FeaturesMojo extends AbstractMojo {
     private Boolean numbered;
     @Parameter(property = "ignoreCertErrors", defaultValue = "false")
     private Boolean ignoreCertErrors;
-
+    @Parameter(property = "secretMethod")
+    private String secretMethod;
+    @Parameter(property = "secretClassName")
+    private String secretClassName;
     public void execute()
             throws MojoExecutionException {
         ArgumentsFeatures arguments = new ArgumentsFeatures(
@@ -85,6 +89,16 @@ public class FeaturesMojo extends AbstractMojo {
                 numbered,
                 ignoreCertErrors
         );
+        try{
+            Class cls;
+            Method getSecretKey;
+            cls = Class.forName(secretClassName);
+            Object util = cls.newInstance();
+            getSecretKey = cls.getMethod(secretMethod, String.class);
+            arguments.setSecretKey((String)getSecretKey.invoke(util, arguments.getSecretKey()));
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),

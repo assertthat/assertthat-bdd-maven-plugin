@@ -36,6 +36,7 @@ import org.codehaus.jettison.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 @Mojo(name = "report", defaultPhase = LifecyclePhase.TEST)
 public class ReportMojo extends AbstractMojo {
@@ -70,6 +71,10 @@ public class ReportMojo extends AbstractMojo {
     private Boolean ignoreCertErrors;
     @Parameter(property = "runId")
     private Long runId = -1L;
+    @Parameter(property = "secretMethod")
+    private String secretMethod;
+    @Parameter(property = "secretClassName")
+    private String secretClassName;
 
     public void execute()
             throws MojoExecutionException {
@@ -89,7 +94,16 @@ public class ReportMojo extends AbstractMojo {
                 metadata,
                 ignoreCertErrors
         );
-
+        try{
+            Class cls;
+            Method getSecretKey;
+            cls = Class.forName(secretClassName);
+            Object util = cls.newInstance();
+            getSecretKey = cls.getMethod(secretMethod, String.class);
+            arguments.setSecretKey((String)getSecretKey.invoke(util, arguments.getSecretKey()));
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),
@@ -98,7 +112,6 @@ public class ReportMojo extends AbstractMojo {
                 arguments.getProxyPassword(),
                 arguments.getJiraServerUrl(),
                 arguments.isIgnoreCertErrors());
-
         String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null);
         for (String f : files) {
             try {
