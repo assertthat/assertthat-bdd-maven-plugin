@@ -19,7 +19,7 @@ Full plugin configuration below, optional properties can be omitted
  <plugin>
     <groupId>com.assertthat.plugins</groupId>
     <artifactId>assertthat-bdd-maven-plugin</artifactId>
-    <version>1.6.3</version>
+    <version>1.7.0</version>
     <configuration>
         <projectId>
             <!--Jira project id e.g. 10001-->
