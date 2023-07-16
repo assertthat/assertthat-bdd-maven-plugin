@@ -3,7 +3,7 @@
     <groupId>com.assertthat.plugins</groupId>
     <artifactId>assertthat-bdd-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.6.9-WF</version>
+    <version>1.7.0</version>
     <name>assertthat-bdd-maven-plugin</name>
     <description>AssertThat BDD Jira maven plugin</description>
     <url>http://www.assertthat.com</url>
@@ -23,7 +23,7 @@
         <url>https://github.com/assertthat/assertthat-bdd-maven-plugin</url>
         <connection>scm:git:ssh://git@github.com/assertthat/assertthat-bdd-maven-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/assertthat/assertthat-bdd-maven-plugin.git</developerConnection>
-        <tag>v1.6.4</tag>
+        <tag>v1.7.0</tag>
   </scm>
     <developers>
         <developer>

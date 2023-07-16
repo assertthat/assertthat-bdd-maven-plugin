@@ -50,6 +50,8 @@ Full plugin configuration below, optional properties can be omitted
                 <tags>(@smoke or @ui) and (not @slow)</tags>
                 <!--Optional - prepend ordinal to feature name (default is true)-->                
                 <numbered>false</numbered>
+                <!--Optional - whether the phase is enabled (default is true)-->
+                <enabled>true</enabled>
             </configuration>
             <id>features</id>
             <goals>
@@ -78,6 +80,8 @@ Full plugin configuration below, optional properties can be omitted
                 <jql>project = XX AND key in ('XXX-1')</jql>
                  <!--Optional - In case you want to append results to the existing test run -->
                 <runId>123</runId>
+                <!--Optional - whether the phase is enabled (default is true)-->
+                <enabled>true</enabled>
             </configuration>
         </execution>
     </executions>
