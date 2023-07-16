@@ -76,8 +76,12 @@ public class ReportMojo extends AbstractMojo {
     @Parameter(property = "secretClassName")
     private String secretClassName;
 
+    @Parameter(property = "enabled", defaultValue = "true")
+    private Boolean enabled;
+
     public void execute()
             throws MojoExecutionException {
+        if(!enabled) return;
         ArgumentsReport arguments = new ArgumentsReport(
                 accessKey,
                 secretKey,
@@ -94,15 +98,17 @@ public class ReportMojo extends AbstractMojo {
                 metadata,
                 ignoreCertErrors
         );
-        try{
-            Class cls;
-            Method getSecretKey;
-            cls = Class.forName(secretClassName);
-            Object util = cls.newInstance();
-            getSecretKey = cls.getMethod(secretMethod, String.class);
-            arguments.setSecretKey((String)getSecretKey.invoke(util, arguments.getSecretKey()));
-        }catch (Exception ex){
-            ex.printStackTrace();
+        if(secretClassName!=null) {
+            try {
+                Class cls;
+                Method getSecretKey;
+                cls = Class.forName(secretClassName);
+                Object util = cls.newInstance();
+                getSecretKey = cls.getMethod(secretMethod, String.class);
+                arguments.setSecretKey((String) getSecretKey.invoke(util, arguments.getSecretKey()));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
