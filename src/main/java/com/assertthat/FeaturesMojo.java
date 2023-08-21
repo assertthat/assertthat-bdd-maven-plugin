@@ -72,9 +72,10 @@ public class FeaturesMojo extends AbstractMojo {
     private String secretMethod;
     @Parameter(property = "secretClassName")
     private String secretClassName;
-
     @Parameter(property = "enabled", defaultValue = "true")
     private Boolean enabled;
+    @Parameter(property = "cleanupFeatures", defaultValue = "true")
+    private Boolean cleanupFeatures;
     public void execute()
             throws MojoExecutionException {
         if(!enabled) return;
@@ -91,7 +92,8 @@ public class FeaturesMojo extends AbstractMojo {
                 tags,
                 jiraServerUrl,
                 numbered,
-                ignoreCertErrors
+                ignoreCertErrors,
+                cleanupFeatures
         );
         if(secretClassName!=null) {
             try {
@@ -117,7 +119,7 @@ public class FeaturesMojo extends AbstractMojo {
         try {
             File inZip =
                     apiUtil.download(new File(arguments.getOutputFolder()),
-                            arguments.getMode(), arguments.getJql(), arguments.getTags(), arguments.isNumbered());
+                            arguments.getMode(), arguments.getJql(), arguments.getTags(), arguments.isNumbered(), arguments.isCleanupFeatures());
             File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()));
             zip.delete();
         } catch (IOException e) {

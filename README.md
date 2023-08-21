@@ -19,7 +19,7 @@ Full plugin configuration below, optional properties can be omitted
  <plugin>
     <groupId>com.assertthat.plugins</groupId>
     <artifactId>assertthat-bdd-maven-plugin</artifactId>
-    <version>1.7.0</version>
+    <version>1.7.1</version>
     <configuration>
         <projectId>
             <!--Jira project id e.g. 10001-->
@@ -52,6 +52,8 @@ Full plugin configuration below, optional properties can be omitted
                 <numbered>false</numbered>
                 <!--Optional - whether the phase is enabled (default is true)-->
                 <enabled>true</enabled>
+                <!--Optional - Delete features in outputFolder directory before downloading (default is true)-->
+                <ceanupFeatures>true</ceanupFeatures>
             </configuration>
             <id>features</id>
             <goals>
