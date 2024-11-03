@@ -45,6 +45,8 @@ public class ReportMojo extends AbstractMojo {
     private String accessKey;
     @Parameter(property = "secretKey")
     private String secretKey;
+    @Parameter(property = "token")
+    private String token;
     @Parameter(property = "projectId", required = true)
     private String projectId;
     @Parameter(property = "runName")
@@ -85,6 +87,7 @@ public class ReportMojo extends AbstractMojo {
         ArgumentsReport arguments = new ArgumentsReport(
                 accessKey,
                 secretKey,
+                token,
                 projectId,
                 runName,
                 jsonReportFolder,
@@ -113,6 +116,7 @@ public class ReportMojo extends AbstractMojo {
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),
+                arguments.getToken(),
                 arguments.getProxyURI(),
                 arguments.getProxyUsername(),
                 arguments.getProxyPassword(),

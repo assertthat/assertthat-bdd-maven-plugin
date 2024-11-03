@@ -46,6 +46,9 @@ public class FeaturesMojo extends AbstractMojo {
     @Parameter(property = "secretKey")
     private String secretKey;
 
+    @Parameter(property = "token")
+    private String token;
+
     @Parameter(property = "projectId", required = true)
     private String projectId;
     @Parameter(property = "tags")
@@ -82,6 +85,7 @@ public class FeaturesMojo extends AbstractMojo {
         ArgumentsFeatures arguments = new ArgumentsFeatures(
                 accessKey,
                 secretKey,
+                token,
                 projectId,
                 outputFolder,
                 proxyURI,
@@ -110,6 +114,7 @@ public class FeaturesMojo extends AbstractMojo {
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),
+                arguments.getToken(),
                 arguments.getProxyURI(),
                 arguments.getProxyUsername(),
                 arguments.getProxyPassword(),
