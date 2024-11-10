@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/assertthat/assertthat-bdd-maven-plugin.svg?branch=master)](https://travis-ci.org/assertthat/assertthat-bdd-maven-plugin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.assertthat.plugins/assertthat-bdd-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.assertthat.plugins/assertthat-bdd-maven-plugin)
 
 ## Description
@@ -18,7 +19,7 @@ Full plugin configuration below, optional properties can be omitted
  <plugin>
     <groupId>com.assertthat.plugins</groupId>
     <artifactId>assertthat-bdd-maven-plugin</artifactId>
-    <version>1.7.3</version>
+    <version>1.7.4</version>
     <configuration>
         <projectId>
             <!--Jira project id e.g. 10001-->
